@@ -18,6 +18,11 @@ public abstract class Element {
     
     static int elementCounter;
 
+    
+    /***
+     * GETTERS AND SETTERS
+     * 
+     */
     public String getId() {
         return id;
     }
@@ -62,17 +67,22 @@ public abstract class Element {
         return state;
     }
 
+    /***
+     * 
+     */
+    public Element(){
+        this.id = "EL_" + Integer.toString(++Element.elementCounter);
+    }
+    
+    
+    
+    /***
+     * 
+     */
     public void setState(float[][] state) {
         this.state = state;
     }
     
-    
-    
-    
-    static void stepCounter(){
-        elementCounter++;
-    }
-    
-    
+   
     
 }

@@ -1,5 +1,8 @@
 package com.capit.vesselsolver.sim;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *Stores/ Handles Output of Solver
  * 
@@ -14,6 +17,10 @@ public class SolutionData {
     
     Simulation sim;
     
+    List<float[]> solution;
+    
+    
+    
     public SolutionData(Simulation sim){
         this.sim=sim;
         this.init();
@@ -21,7 +28,7 @@ public class SolutionData {
     
     private void init(){
         
-        
+        this.solution = new ArrayList<>();
         
     }
     

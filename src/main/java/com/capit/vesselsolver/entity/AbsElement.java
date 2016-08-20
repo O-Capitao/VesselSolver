@@ -13,11 +13,12 @@ public abstract class AbsElement {
         
     Solver solver;
     
-    AbsElement father, son;
+    String fatherName, sonName;
     float[][] state;
     
     static int elementCounter;
 
+    private AbsElement father,son;
     
     /***
      * GETTERS AND SETTERS
@@ -65,6 +66,15 @@ public abstract class AbsElement {
 
     public float[][] getState() {
         return state;
+    }
+    
+    
+    /***
+     * After tree init run this to turn names into references
+     * TODO:Not sure what to pass. Network Object? Who knows every relation??
+     */
+    void linkUp(){
+        
     }
     
     void initState(){

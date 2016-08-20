@@ -12,7 +12,7 @@ public class Input0D extends AbsElement {
     float[][] inputValues;
     
     
-    public Input0D(String name, AbsElement son, float amplitude, float period, int n_samples ){
+    public Input0D(String name, String son, float amplitude, float period, int n_samples ){
         super(name);
         
         this.amplitude = amplitude;
@@ -21,7 +21,8 @@ public class Input0D extends AbsElement {
         this.n_disc = 1; //one single position
         this.inputValues = new float[2][n_samples];
         
-        this.father=null;
+        this.fatherName=null;
+        this.sonName = son;
         
         
         this.initState();
@@ -33,6 +34,9 @@ public class Input0D extends AbsElement {
      * Produces Sin Pulse Signal ---> One half-period
      * @param n_steps number of time steps in which the period will be divided
      * @return array of values
+     * 
+     * TODO: Test this
+     * 
      */
     public static float[] sinGenerator(int n_steps){
         
@@ -45,6 +49,12 @@ public class Input0D extends AbsElement {
         }
         
         return values;
+    }
+    
+    @Override
+    public String toString(){
+        return "INPUT ELEMENT SUMMARY\nID=" + this.id + "\nT=" + this.T +
+                    "\namplitude=" + this.amplitude;
     }
     
     

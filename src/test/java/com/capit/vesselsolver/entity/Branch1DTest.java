@@ -35,7 +35,7 @@ public class Branch1DTest {
     @org.junit.Test
     public void testSomeMethod() {
         
-        Branch1D b1D = new Branch1D("pri",10);
+        Branch1D b1D = new Branch1D("pri",10,"s","t");
         
         if (b1D.state[0].length != 2){
             

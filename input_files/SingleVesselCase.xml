@@ -1,27 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Input Document
+Input Document - defines domain
 -->
 
 
-<root>
-    <network>
-        <name>"Single Vessel"</name>
-    </network>
-    
-    <inbound>
-        <T>1</T>
-        <amp>1</amp>
-    </inbound>
-    
+<tree>
+    <network name="First Xperiment"/>
+    <input name="input" son="primeiro" T="1" amp="1"/>
     <branches>
-        <branch>
-            <name>Primeiro</name>
-            <radius>1</radius>
-            <L>1</L>
-            <father></father>
-            <son></son>
-        </branch>
+        <branch name="primeiro" l="1.0" r="0.05" father="input" son="output"/>
     </branches>
-    
-</root>
+    <output name="output" R="0.0" father="primeiro"/>
+ </tree>

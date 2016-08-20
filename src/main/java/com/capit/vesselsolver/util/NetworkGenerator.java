@@ -1,7 +1,11 @@
 package com.capit.vesselsolver.util;
 
+import com.capit.vesselsolver.entity.AbsElement;
+import com.capit.vesselsolver.entity.Input0D;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
@@ -19,7 +23,11 @@ import org.xml.sax.SAXException;
  */
 public class NetworkGenerator {
     
-    public static void getFromFile(String fileLocation){
+    public static List<AbsElement> getElementsFromFile(String fileLocation){
+        
+        
+        List<AbsElement> allElements = new ArrayList<>();
+        
         
         try {
             
@@ -28,25 +36,27 @@ public class NetworkGenerator {
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(fXmlFile);
             doc.getDocumentElement().normalize();
+   
+            /***
+             * Input BC Importer
+             * TODO:
+             */
+            {
+   
+                NodeList inBC = doc.getElementsByTagName("input");
+                Node inBCNode = inBC.item(0); //consider the first only
+                
+                Input0D in0d = new Input0D(inBCNode.getAttributes().getNamedItem("name").getNodeValue(),
+                                           inBCNode.getAttributes().getNamedItem("son").getNodeValue(), 
+                                           Float.parseFloat(inBCNode.getAttributes().getNamedItem("amp").getNodeValue()),
+                                           Float.parseFloat(inBCNode.getAttributes().getNamedItem("T").getNodeValue()),
+                                           10);
+                
+                allElements.add(in0d);
+                
+            }
             
-            NodeList nList = doc.getElementsByTagName("branch");
-            
-            for (int temp = 0; temp < nList.getLength(); temp++) {
 
-		Node nNode = nList.item(temp);
-
-		//System.out.println("\nCurrent Element :" + nNode.getNodeName());
-
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-
-			Element eElement = (Element) nNode;
-
-			System.out.println("name: " + eElement.getElementsByTagName("name").item(0).getTextContent());
-			System.out.println("radius: " + eElement.getElementsByTagName("radius").item(0).getTextContent());
-			
-
-		}
-	}
             
             
             
@@ -55,7 +65,11 @@ public class NetworkGenerator {
             Logger.getLogger(NetworkGenerator.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        
+        return allElements;
+        
     }
     
+
     
 }

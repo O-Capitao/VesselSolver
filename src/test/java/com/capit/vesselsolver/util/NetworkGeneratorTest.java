@@ -1,11 +1,12 @@
 package com.capit.vesselsolver.util;
 
+import com.capit.vesselsolver.entity.AbsElement;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -41,8 +42,16 @@ public class NetworkGeneratorTest {
 
         String fileLocation = "/Users/capitaoF/RepoWork/VesselSolver/input_files/SingleVesselCase.xml";
 
-        NetworkGenerator.getFromFile(fileLocation);
-
+        
+        
+        List<AbsElement> l = NetworkGenerator.getElementsFromFile(fileLocation);
+        
+        
+        /**
+         * test Element creation
+         */
+        System.out.println(l.get(0).toString());
+        
     }
     
 }

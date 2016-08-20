@@ -1,6 +1,6 @@
 package com.capit.vesselsolver.sim;
 
-import com.capit.vesselsolver.entity.Element;
+import com.capit.vesselsolver.entity.AbsElement;
 
 /**
  *
@@ -10,9 +10,9 @@ import com.capit.vesselsolver.entity.Element;
  */
 public abstract class Solver {
     
-    Element owner;
+    AbsElement owner;
     
-    public Solver(Element caller){
+    public Solver(AbsElement caller){
         caller.setSolver(this);
     }
     

@@ -4,7 +4,7 @@ package com.capit.vesselsolver.entity;
  *
  * @author capitaoF
  */
-public class Input0D extends Element {
+public class Input0D extends AbsElement {
     
     int n_samples;
     float amplitude, T;
@@ -12,22 +12,39 @@ public class Input0D extends Element {
     float[][] inputValues;
     
     
-    public Input0D(Element son, float amplitude, float period, int n_samples ){
-        super();
+    public Input0D(String name, AbsElement son, float amplitude, float period, int n_samples ){
+        super(name);
         
         this.amplitude = amplitude;
         this.T = period;
-        
         this.n_samples = n_samples;
-        
         this.n_disc = 1; //one single position
-        
-        this.state = new float[2][n_disc];
         this.inputValues = new float[2][n_samples];
         
+        this.father=null;
         
         
+        this.initState();
         
+        
+    }
+    
+    /**
+     * Produces Sin Pulse Signal ---> One half-period
+     * @param n_steps number of time steps in which the period will be divided
+     * @return array of values
+     */
+    public static float[] sinGenerator(int n_steps){
+        
+        float[] values = new float[n_steps];
+        
+        for (int i = 0 ; i < n_steps ; i++ ){
+            
+            values[i] = (float) Math.sin(i*Math.PI/n_steps);
+            
+        }
+        
+        return values;
     }
     
     

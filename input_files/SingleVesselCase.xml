@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Input Document
+-->
+
+
+<root>
+    <network>
+        <name>"Single Vessel"</name>
+    </network>
+    
+    <inbound>
+        <T>1</T>
+        <amp>1</amp>
+    </inbound>
+    
+    <branches>
+        <branch>
+            <name>Primeiro</name>
+            <radius>1</radius>
+            <L>1</L>
+            <father></father>
+            <son></son>
+        </branch>
+    </branches>
+    
+</root>

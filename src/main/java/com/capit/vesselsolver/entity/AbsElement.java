@@ -6,14 +6,14 @@ import com.capit.vesselsolver.sim.Solver;
  *
  * @author capitaoF
  */
-public abstract class Element {
+public abstract class AbsElement {
     
     String id;
     int n_disc;
         
     Solver solver;
     
-    Element father, son;
+    AbsElement father, son;
     float[][] state;
     
     static int elementCounter;
@@ -47,31 +47,43 @@ public abstract class Element {
         this.solver = solver;
     }
 
-    public Element getFather() {
+    public AbsElement getFather() {
         return father;
     }
 
-    public void setFather(Element father) {
+    public void setFather(AbsElement father) {
         this.father = father;
     }
 
-    public Element getSon() {
+    public AbsElement getSon() {
         return son;
     }
 
-    public void setSon(Element son) {
+    public void setSon(AbsElement son) {
         this.son = son;
     }
 
     public float[][] getState() {
         return state;
     }
+    
+    void initState(){
+        
+        state = new float[n_disc][2];
+        
+        for (float[] out : state){
+            for (float inn : out ){
+                inn = 0 ;
+            }
+        }
+        
+    }
 
     /***
      * 
      */
-    public Element(){
-        this.id = "EL_" + Integer.toString(++Element.elementCounter);
+    public AbsElement(String name){
+        id = name ;
     }
     
     
@@ -82,6 +94,8 @@ public abstract class Element {
     public void setState(float[][] state) {
         this.state = state;
     }
+    
+    
     
    
     

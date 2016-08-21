@@ -10,5 +10,5 @@ Input Document - defines domain
     <branches>
         <branch name="primeiro" l="1.0" r="0.05" father="input" son="output"/>
     </branches>
-    <output name="output" R="0.0" father="primeiro"/>
+    <output name="output" father="primeiro" R="0.0" />
  </tree>

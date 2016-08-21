@@ -1,6 +1,6 @@
 package com.capit.vesselsolver.entity;
 
-import com.capit.vesselsolver.sim.Solver;
+import com.capit.vesselsolver.solver.Solver;
 
 /**
  *
@@ -69,6 +69,8 @@ public abstract class AbsElement {
     }
     
     
+
+    
     /***
      * After tree init run this to turn names into references
      * TODO:Not sure what to pass. Network Object? Who knows every relation??
@@ -77,7 +79,7 @@ public abstract class AbsElement {
         
     }
     
-    void initState(){
+    final void initState(){
         
         state = new float[n_disc][2];
         

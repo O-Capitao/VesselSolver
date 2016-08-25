@@ -19,10 +19,14 @@ public class Output0D extends AbsElement{
         
         this.R=R;
         
-        
-        
     }
     
+    
+    @Override
+    public String toString(){
+        return super.toString() +"\nObj. Class: " + Output0D.class + 
+                "\nRef. Coef.= " + R; 
+    }
     
     
     

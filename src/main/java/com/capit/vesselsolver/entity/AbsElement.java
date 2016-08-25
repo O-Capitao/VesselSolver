@@ -9,7 +9,12 @@ import com.capit.vesselsolver.solver.Solver;
  */
 public abstract class AbsElement {
     
-    String id;
+    /***
+     * Every element keeps this private reference to the network
+     */
+    private static Network nw;
+    
+    String name;
     int n_disc;
         
     Solver solver;
@@ -25,12 +30,12 @@ public abstract class AbsElement {
      * GETTERS AND SETTERS
      * 
      */
-    public String getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setName(String id) {
+        this.name = id;
     }
 
     public int getN_disc() {
@@ -78,11 +83,12 @@ public abstract class AbsElement {
 
     
     /***
-     * After tree init run this to turn names into references
-     * TODO:Not sure what to pass. Network Object? Who knows every relation??
-     * 
+     * After tree init run this to turn names into references 
      */
-    void linkUp(){
+    public void linkUp( Network net ){
+        
+        son = net.elements.get(sonName);
+        father = net.elements.get(fatherName);
         
     }
     
@@ -102,7 +108,7 @@ public abstract class AbsElement {
      * 
      */
     public AbsElement(String name){
-        id = name ;
+        this.name = name ;
     }
     
     
@@ -115,7 +121,23 @@ public abstract class AbsElement {
     }
     
     
-    
+    @Override
+    public String toString(){
+        
+        return "\n\nELEMENT\nElement Name: " + this.getName()+
+                    "\nFather= " + fatherName + 
+                    "\nSon= " + sonName;
+    }
    
+    
+    /*****
+     * Fixes the input network as the one to which every Element
+     * created by the program belongs
+     * @param net - Network Object
+     */
+    public static void setNetwork(Network net){
+        nw =net;
+    }
+    
     
 }

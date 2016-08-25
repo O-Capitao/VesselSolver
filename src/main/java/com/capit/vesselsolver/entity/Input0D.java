@@ -13,6 +13,7 @@ public class Input0D extends AbsElement {
     
     
     public Input0D(String name, String son, float amplitude, float period, int n_samples ){
+        
         super(name);
         
         this.amplitude = amplitude;
@@ -51,7 +52,7 @@ public class Input0D extends AbsElement {
     
     @Override
     public String toString(){
-        return "INPUT ELEMENT SUMMARY\nID=" + this.id + "\nT=" + this.T +
+        return super.toString() + "\nT=" + this.T +
                     "\namplitude=" + this.amplitude;
     }
     

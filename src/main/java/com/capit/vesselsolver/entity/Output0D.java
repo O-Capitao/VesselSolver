@@ -6,7 +6,9 @@ package com.capit.vesselsolver.entity;
  */
 public class Output0D extends AbsElement{
     
-    public Output0D(String name, String father) {
+    float R;
+    
+    public Output0D(String name, String father, float R) {
         
         super(name);
         this.n_disc = 1; //one single position
@@ -15,9 +17,13 @@ public class Output0D extends AbsElement{
         this.fatherName = father;
         this.sonName = null;
         
+        this.R=R;
+        
         
         
     }
+    
+    
     
     
     

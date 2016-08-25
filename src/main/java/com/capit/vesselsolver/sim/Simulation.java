@@ -1,21 +1,28 @@
 package com.capit.vesselsolver.sim;
 
+import com.capit.vesselsolver.entity.Network;
+
 
 /**
  *
  * @author capitaoF
  */
-public class Simulation implements Runnable{
+public class Simulation {
     
     private int totalSteps;
     private float totalTime;
     
+    private Network nw;
     
-
-    @Override
-    public void run() {
+    
+    private void generateNetwork(String file){
+        
     }
     
+    private void solveStep(){}
+    
+    
+
     
     
 }

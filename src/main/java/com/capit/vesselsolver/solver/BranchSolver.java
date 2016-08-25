@@ -19,6 +19,12 @@ public class BranchSolver extends Solver{
         
     }
 
+    /***
+     * A design decision - 
+     * Calculate lambdas for evry step (u=f(w1,w2) and c=f(u,W1))
+     * vs
+     * Store them in Element Object. - Branch1D
+    */
     @Override
     public void solveStep() {
         

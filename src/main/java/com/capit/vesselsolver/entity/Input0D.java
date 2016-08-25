@@ -35,8 +35,6 @@ public class Input0D extends AbsElement {
      * @param n_steps number of time steps in which the period will be divided
      * @return array of values
      * 
-     * TODO: Test this
-     * 
      */
     public static float[] sinGenerator(int n_steps){
         

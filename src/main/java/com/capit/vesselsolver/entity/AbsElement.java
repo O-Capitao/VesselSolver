@@ -3,7 +3,8 @@ package com.capit.vesselsolver.entity;
 import com.capit.vesselsolver.solver.Solver;
 
 /**
- *
+ *TODO:
+ * 
  * @author capitaoF
  */
 public abstract class AbsElement {
@@ -68,12 +69,18 @@ public abstract class AbsElement {
         return state;
     }
     
-    
+    /**
+     * Just an adapter
+     */
+    void solveStep(){
+        this.solver.solveStep();
+    }
 
     
     /***
      * After tree init run this to turn names into references
      * TODO:Not sure what to pass. Network Object? Who knows every relation??
+     * 
      */
     void linkUp(){
         

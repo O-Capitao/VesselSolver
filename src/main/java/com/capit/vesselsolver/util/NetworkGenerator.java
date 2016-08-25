@@ -1,7 +1,9 @@
 package com.capit.vesselsolver.util;
 
 import com.capit.vesselsolver.entity.AbsElement;
+import com.capit.vesselsolver.entity.Branch1D;
 import com.capit.vesselsolver.entity.Input0D;
+import com.capit.vesselsolver.entity.Output0D;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,7 +41,7 @@ public class NetworkGenerator {
    
             /***
              * Input BC Importer
-             * TODO:
+             * TODO: outlets
              */
             {
    
@@ -56,6 +58,40 @@ public class NetworkGenerator {
                 
             }
             
+            //For the branches
+            {
+            
+                NodeList inBC = doc.getElementsByTagName("branch");
+                Node inBCNode;
+                Branch1D work_branch;
+                for (int i = 0 ; i > inBC.getLength() ; i++ ){
+                
+                    inBCNode = inBC.item(i);
+
+                    work_branch = new Branch1D(inBCNode.getAttributes().getNamedItem("name").getNodeValue(),
+                                               5, //default value - TODO: Dynamic -> Minimum work vs MAximum precision
+                                               inBCNode.getAttributes().getNamedItem("father").getNodeValue(),
+                                               inBCNode.getAttributes().getNamedItem("son").getNodeValue() );
+                
+                allElements.add(work_branch);
+                }
+            }
+            
+            
+            //String name, String father, float R
+            {
+   
+                NodeList inBC = doc.getElementsByTagName("output");
+                Node inBCNode = inBC.item(0); //consider the first only
+                
+                Output0D out0d = new Output0D(inBCNode.getAttributes().getNamedItem("name").getNodeValue(),
+                                           inBCNode.getAttributes().getNamedItem("father").getNodeValue(), 
+                                           Float.parseFloat(inBCNode.getAttributes().getNamedItem("R").getNodeValue())
+                                           );
+                
+                allElements.add(out0d);
+                
+            }
 
             
             

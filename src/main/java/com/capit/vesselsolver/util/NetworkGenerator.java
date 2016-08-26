@@ -4,6 +4,7 @@ import com.capit.vesselsolver.entity.AbsElement;
 import com.capit.vesselsolver.entity.Branch1D;
 import com.capit.vesselsolver.entity.Input0D;
 import com.capit.vesselsolver.entity.Output0D;
+import com.capit.vesselsolver.sim.SimulationProperties;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -27,6 +28,65 @@ import org.xml.sax.SAXException;
  * @author capitaoF
  */ 
 public class NetworkGenerator {
+    
+    public static SimulationProperties getSimulationPropertiesFromFile(String fileLocation){
+        
+        SimulationProperties sp = null;
+        
+        try {
+                DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+                Document doc = null;
+                
+            try {
+                
+                File fXmlFile = new File(fileLocation);
+
+                doc = dBuilder.parse(fXmlFile);
+                doc.getDocumentElement().normalize();
+                
+            } catch (FileNotFoundException ex){
+                /***
+                 * In case of bad file name ----> Warn of this and exit
+                 */
+                
+                Logger.getLogger(NetworkGenerator.class.getName()).log(Level.SEVERE, 
+                        "You must provide a valid full file path, Exiting execution...", ex);
+                
+                System.exit(0);
+                
+            }
+            /***
+             * Properties importer
+             */
+            {
+                NodeList inBC = doc.getElementsByTagName("simulation");
+                Node inBCNode = inBC.item(0); //consider the first only
+                
+                sp = new SimulationProperties(
+                            Float.parseFloat(inBCNode.getAttributes().getNamedItem("totaltime").getNodeValue()),
+                            Float.parseFloat(inBCNode.getAttributes().getNamedItem("courant").getNodeValue())
+                            );
+                
+            }
+            
+
+            
+            
+        } catch (SAXException | IOException | ParserConfigurationException ex) {
+            Logger.getLogger(NetworkGenerator.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if (sp.totalTime <= 0 ){
+            
+            System.out.println("Simulation duration must be a non-null positive number");
+            System.exit(0);
+        }
+        
+        return sp;
+        
+    }
+    
     
     public static List<AbsElement> getElementsFromFile(String fileLocation){
         
@@ -58,8 +118,7 @@ public class NetworkGenerator {
                 
             }
             /***
-             * Input BC Importer
-             * TODO: outlets
+             * Input Aquisition
              */
             {
    
@@ -76,7 +135,9 @@ public class NetworkGenerator {
                 
             }
             
-            //For the branches
+            /***
+             * Branch Aquisition
+             */
             {
             
                 NodeList inBC = doc.getElementsByTagName("branch");
@@ -98,8 +159,9 @@ public class NetworkGenerator {
                 }
             }
             
-            
-            //String name, String father, float R
+            /****
+             * Output Aquisition
+             */
             {
    
                 NodeList inBC = doc.getElementsByTagName("output");
@@ -114,10 +176,6 @@ public class NetworkGenerator {
                 
             }
 
-            
-            
-            
-            
         } catch (SAXException | IOException | ParserConfigurationException ex) {
             Logger.getLogger(NetworkGenerator.class.getName()).log(Level.SEVERE, null, ex);
         }

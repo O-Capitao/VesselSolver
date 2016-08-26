@@ -5,6 +5,12 @@ Input Document - defines domain
 
 
 <tree>
+    <!-- Simulation Execution Outline -->
+    <!-- All units are SI-->
+    <simulation totaltime="1" courant="1e-5"/>
+    
+    <!-- Topology Descriptor-->
+    <!-- All units are SI -->
     <network name="First Xperiment"/>
     <input name="input" son="primeiro" T="1" amp="1"/>
     <branches>

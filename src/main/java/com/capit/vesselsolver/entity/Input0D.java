@@ -1,5 +1,7 @@
 package com.capit.vesselsolver.entity;
 
+import com.capit.vesselsolver.solver.Solver;
+
 /**
  *
  * @author capitaoF
@@ -11,14 +13,13 @@ public class Input0D extends AbsElement {
     
     float[][] inputValues;
     
-    
-    public Input0D(String name, String son, float amplitude, float period, int n_samples ){
+    public Input0D(String name, String son, float amplitude, float period ){
         
         super(name);
         
         this.amplitude = amplitude;
         this.T = period;
-        this.n_samples = n_samples;
+        
         this.n_disc = 1; //one single position
         this.inputValues = new float[2][n_samples];
         
@@ -26,7 +27,7 @@ public class Input0D extends AbsElement {
         this.sonName = son;
         
         
-        this.initState();
+        //this.initState();
         
         
     }
@@ -54,6 +55,14 @@ public class Input0D extends AbsElement {
     public String toString(){
         return super.toString() + "\nT=" + this.T +
                     "\namplitude=" + this.amplitude;
+    }
+
+    @Override
+    void solveStep() {
+
+        Solver.stepInput0D(this);
+
+
     }
     
     

@@ -1,30 +1,52 @@
 package com.capit.vesselsolver.solver;
 
-import com.capit.vesselsolver.entity.AbsElement;
 import com.capit.vesselsolver.entity.Branch1D;
+import com.capit.vesselsolver.entity.Input0D;
+import com.capit.vesselsolver.entity.Output0D;
+import com.capit.vesselsolver.sim.Simulation;
+
 
 /**
- *
- *  SOlver 
- * 
- * @author capitaoF
+ *  Only a container for static methods
+ *  @author capitaoF
  */
 public abstract class Solver {
     
-    AbsElement owner;
+    static Simulation sim;
     
-    float deltat;
-    
-    public Solver(AbsElement caller, float dt){
-        caller.setSolver(this);
+   
+    /****
+     * Rotina para o elemento de entrada na rede.
+     * Gera injecção de onda sinosoidal
+     * 
+     *  F
+     * 
+     * @param in0d 
+     */
+    public static void stepInput0D(Input0D in0d){
         
-        deltat = dt;
+        
         
         
     }
     
- 
-    public abstract void solveStep();
+    /****
+     * Rotina para o elemento de saída
+     * @param out0d 
+     */
+    public static void stepOutput0D(Output0D out0d){
         
+        
+    }
+        
+    /****
+     * Rotina para troço 1D
+     * @param branch1d 
+     */
+    public static void stepBranch1D(Branch1D branch1d){
+        
+        
+        
+    }
 
 }

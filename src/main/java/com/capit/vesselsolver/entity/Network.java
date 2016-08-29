@@ -1,5 +1,6 @@
 package com.capit.vesselsolver.entity;
 
+import com.capit.vesselsolver.sim.SimulationProperties;
 import com.capit.vesselsolver.util.NetworkGenerator;
 import java.util.HashMap;
 import java.util.List;
@@ -15,10 +16,12 @@ public class Network {
     String name;
     AbsElement root;
     
+    
+    
     public Map<String, AbsElement> elements;
 
 
-    public Network(String name, String fileName) {
+    public Network(String name, String fileName, SimulationProperties sp) {
         
         this.name = name;
         this.elements = new HashMap<>();

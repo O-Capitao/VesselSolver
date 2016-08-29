@@ -17,9 +17,10 @@ public abstract class AbsElement {
     String name;
     int n_disc;
         
-    Solver solver;
-    
     String fatherName, sonName;
+    
+    //float fixedWaveSpeed;
+    
     float[][] state;
     
     static int elementCounter;
@@ -46,14 +47,6 @@ public abstract class AbsElement {
         this.n_disc = n_disc;
     }
 
-    public Solver getSolver() {
-        return solver;
-    }
-
-    public void setSolver(Solver solver) {
-        this.solver = solver;
-    }
-
     public AbsElement getFather() {
         return father;
     }
@@ -77,9 +70,7 @@ public abstract class AbsElement {
     /**
      * Just an adapter
      */
-    void solveStep(){
-        this.solver.solveStep();
-    }
+    abstract void solveStep();
 
     
     /***
@@ -92,9 +83,14 @@ public abstract class AbsElement {
         
     }
     
+    /****
+     * State is defined by :
+     * 
+     * {W1, W2, u } ( C0 é fixo e propriedade )
+     */
     final void initState(){
         
-        state = new float[n_disc][2];
+        state = new float[n_disc][3];
         
         for (float[] out : state){
             for (float inn : out ){
@@ -111,11 +107,6 @@ public abstract class AbsElement {
         this.name = name ;
     }
     
-    
-    
-    /***
-     * 
-     */
     public void setState(float[][] state) {
         this.state = state;
     }

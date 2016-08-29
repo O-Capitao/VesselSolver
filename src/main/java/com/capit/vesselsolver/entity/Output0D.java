@@ -1,5 +1,7 @@
 package com.capit.vesselsolver.entity;
 
+import com.capit.vesselsolver.solver.Solver;
+
 /**
  *  Purely Reflective Output
  * @author capitaoF
@@ -8,7 +10,7 @@ public class Output0D extends AbsElement{
     
     float R;
     
-    public Output0D(String name, String father, float R) {
+    public Output0D( String name, String father, float R ) {
         
         super(name);
         this.n_disc = 1; //one single position
@@ -26,6 +28,13 @@ public class Output0D extends AbsElement{
     public String toString(){
         return super.toString() +"\nObj. Class: " + Output0D.class + 
                 "\nRef. Coef.= " + R; 
+    }
+
+    @Override
+    void solveStep() {
+
+        Solver.stepOutput0D(this);
+
     }
     
     

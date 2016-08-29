@@ -128,8 +128,7 @@ public class NetworkGenerator {
                 Input0D in0d = new Input0D(inBCNode.getAttributes().getNamedItem("name").getNodeValue(),
                                            inBCNode.getAttributes().getNamedItem("son").getNodeValue(), 
                                            Float.parseFloat(inBCNode.getAttributes().getNamedItem("amp").getNodeValue()),
-                                           Float.parseFloat(inBCNode.getAttributes().getNamedItem("T").getNodeValue()),
-                                           10);
+                                           Float.parseFloat(inBCNode.getAttributes().getNamedItem("T").getNodeValue()));
                 
                 allElements.add(in0d);
                 
@@ -146,13 +145,18 @@ public class NetworkGenerator {
                 
                 for (int i = 0 ; i < inBC.getLength() ; i++ ){
                 
+                    
                     inBCNode = inBC.item(i);
 
                     work_branch = new Branch1D(inBCNode.getAttributes().getNamedItem("name").getNodeValue(),
-                                               5, //default value - TODO: Dynamic -> Minimum work vs MAximum precision
+                                               Integer.parseInt( inBCNode.getAttributes().getNamedItem("n").getNodeValue() ),
                                                inBCNode.getAttributes().getNamedItem("father").getNodeValue(),
                                                inBCNode.getAttributes().getNamedItem("son").getNodeValue(),
-                                               Float.parseFloat( inBCNode.getAttributes().getNamedItem("l").getNodeValue() ));
+                                               Float.parseFloat( inBCNode.getAttributes().getNamedItem("l").getNodeValue() ),
+                                               Float.parseFloat( inBCNode.getAttributes().getNamedItem("E").getNodeValue() ),
+                                               Float.parseFloat( inBCNode.getAttributes().getNamedItem("r").getNodeValue() ),
+                                               Float.parseFloat( inBCNode.getAttributes().getNamedItem("h").getNodeValue() ),
+                                               Float.parseFloat( inBCNode.getAttributes().getNamedItem("poiss").getNodeValue() ) );
                         
                 
                 allElements.add(work_branch);

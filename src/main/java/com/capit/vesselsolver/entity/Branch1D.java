@@ -8,7 +8,7 @@ import com.capit.vesselsolver.solver.Solver;
  */
 public class Branch1D extends AbsElement{
     
-    float deltax, L, E, r, h, poiss, C0, beta, A0;
+    float dx, L, E, r, h, poiss, C0, beta, A0;
     
     public Branch1D( String name, int n_disc, String father, String son, 
                      float L, float E, float r, float h, float poiss ){
@@ -24,7 +24,7 @@ public class Branch1D extends AbsElement{
         this.r = r;
         this.poiss = poiss;
         
-        deltax = L/n_disc;
+        dx = L/n_disc;
         
         initState();
         
@@ -34,7 +34,7 @@ public class Branch1D extends AbsElement{
     
     public float getDeltaX(){
         
-        return deltax;
+        return dx;
         
     }
     
@@ -42,7 +42,7 @@ public class Branch1D extends AbsElement{
     public String toString(){
         
         return super.toString() + "\nObj. Class = " + Branch1D.class +
-                "\n dx= " + this.deltax +
+                "\n dx= " + this.dx +
                 "\n L= " + this.L +
                 "\n E= " + this.E +
                 "\n r= " + this.r +
@@ -73,12 +73,36 @@ public class Branch1D extends AbsElement{
         for (float[] out : state){
             
             out[0] = 4 * C0 ;
-            out[1] = out[0] ;
+            out[1] = - out[0] ;
             out[2] = 0 ; 
             
         }
         
         //Should also try to figure out max deltaX allowed
+        
+    }
+
+    public float getDx() {
+        return dx;
+    }
+
+    public float getC0() {
+        return C0;
+    }
+
+    public float getA0() {
+        return A0;
+    }
+    
+    /***
+     * Used in Network Construction And Debugging.
+     * 
+     * @param b1d
+     * @return Estimated maximum timestep allowed
+     */
+    public static float getMaximumDT(Branch1D b1d){
+        
+        return b1d.dx / b1d.C0 ;
         
     }
     

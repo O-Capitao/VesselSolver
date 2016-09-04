@@ -14,12 +14,14 @@ public class Output0D extends AbsElement{
         
         super(name);
         this.n_disc = 1; //one single position
-        this.state = new float[2][n_disc];
+        this.state = new float[3][n_disc];
         
         this.fatherName = father;
         this.sonName = null;
         
         this.R=R;
+        
+        initState();
         
     }
     

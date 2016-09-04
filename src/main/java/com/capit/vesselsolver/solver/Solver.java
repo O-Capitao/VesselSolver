@@ -25,26 +25,40 @@ public abstract class Solver {
      */
     public static void stepInput0D(Input0D in0d){
         
+        in0d.state[0][2] = in0d.stepCounter();  //u
         
-        
+        Branch1D son = (Branch1D)in0d.getSon(); //ugly and stupid
+    
+        in0d.state[0][0] = in0d.state[0][2] + 4 * son.getC0() ;
+        in0d.state[0][1] = in0d.state[0][2] - 4 * son.getC0() ;
         
     }
     
     /****
      * Rotina para o elemento de saída
+     *  Uma execução por step
+     * 
+     * versão Martelada ---> saída supercrítica
+     * 
      * @param out0d 
      */
     public static void stepOutput0D(Output0D out0d){
         
+        System.arraycopy(out0d.getFather().state[0], 0, out0d.state[0], 0, 3);
         
     }
         
     /****
      * Rotina para troço 1D
+     * 
+     * versão Martelada ----> Estado constante
+     * 
      * @param branch1d 
      */
     public static void stepBranch1D(Branch1D branch1d){
         
+        
+        //Do nothing for now
         
         
     }

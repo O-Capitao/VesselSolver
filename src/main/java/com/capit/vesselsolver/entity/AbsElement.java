@@ -3,7 +3,7 @@ package com.capit.vesselsolver.entity;
 import com.capit.vesselsolver.solver.Solver;
 
 /**
- *TODO:
+ * TODO:
  * 
  * @author capitaoF
  */
@@ -13,18 +13,11 @@ public abstract class AbsElement {
      * Every element keeps this private reference to the network
      */
     private static Network nw;
-    
     String name;
     int n_disc;
-        
     String fatherName, sonName;
-    
-    //float fixedWaveSpeed;
-    
-    float[][] state;
-    
+    public float[][] state;
     static int elementCounter;
-
     private AbsElement father,son;
     
     /***
@@ -72,7 +65,6 @@ public abstract class AbsElement {
      */
     abstract void solveStep();
 
-    
     /***
      * After tree init run this to turn names into references 
      */
@@ -120,7 +112,6 @@ public abstract class AbsElement {
                     "\nSon= " + sonName;
     }
    
-    
     /*****
      * Fixes the input network as the one to which every Element
      * created by the program belongs

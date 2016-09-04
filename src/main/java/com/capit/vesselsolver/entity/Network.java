@@ -37,6 +37,9 @@ public class Network {
   
         }
         
+        //hardcoded and ugly...
+        this.root = elements.get("input");
+        
         AbsElement.setNetwork(this);
         
         elements.entrySet().stream().forEach((entry) -> {
@@ -47,8 +50,21 @@ public class Network {
     
    
     
-    
-    public void solveNetwork(){
+    //TODO -> Desencadear solução do passo actual a partir do elemento root
+    // Only called one time per timestep
+    public void solveStep(){
+        
+        AbsElement worker = root;
+        //for now! Only for now
+        //Solve Only one Step
+        
+        do {            
+            
+            worker.solveStep();
+            worker = worker.getSon();
+            
+        } while ( worker != null );
+        
         
     }
 
@@ -77,5 +93,7 @@ public class Network {
         
         return out;
     }
+    
+
     
 }

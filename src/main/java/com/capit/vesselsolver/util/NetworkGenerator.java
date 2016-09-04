@@ -77,7 +77,7 @@ public class NetworkGenerator {
             Logger.getLogger(NetworkGenerator.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        if (sp.totalTime <= 0 ){
+        if (sp.totalt <= 0 ){
             
             System.out.println("Simulation duration must be a non-null positive number");
             System.exit(0);

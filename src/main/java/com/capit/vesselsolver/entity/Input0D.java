@@ -8,10 +8,12 @@ import com.capit.vesselsolver.solver.Solver;
  */
 public class Input0D extends AbsElement {
     
-    int n_samples;
-    float amplitude, T;
+    final int n_samples; //samples representing one full period
+    int sample_counter;
     
-    float[][] inputValues;
+    float amplitude, T; //amplitude <-- velocity
+    
+    public float[] inputValues;  //must be public to be accessable by solver
     
     public Input0D(String name, String son, float amplitude, float period ){
         
@@ -20,31 +22,41 @@ public class Input0D extends AbsElement {
         this.amplitude = amplitude;
         this.T = period;
         
+        n_samples = 100; //must init ---> dependant on dt...
+        
         this.n_disc = 1; //one single position
-        this.inputValues = new float[2][n_samples];
+        this.inputValues = new float[n_samples];
         
         this.fatherName=null;
         this.sonName = son;
         
         
-        //this.initState();
+        this.initState();
         
+        
+        /***
+         * Assign forced input values --- imposed velocity
+         */
+        inputValues = sinGenerator(n_samples, amplitude);
         
     }
     
     /**
      * Produces Sin Pulse Signal ---> One half-period
      * @param n_steps number of time steps in which the period will be divided
+     * 
+     * amplitude=1
+     * 
      * @return array of values
      * 
      */
-    public static float[] sinGenerator(int n_steps){
+    public static float[] sinGenerator(int n_steps, float amp ){
         
         float[] values = new float[n_steps];
         
         for (int i = 0 ; i < n_steps ; i++ ){
             
-            values[i] = (float) Math.sin(i*Math.PI/n_steps);
+            values[i] = amp * (float) Math.sin(i*Math.PI/n_steps);
             
         }
         
@@ -64,6 +76,22 @@ public class Input0D extends AbsElement {
 
 
     }
-    
+
+    /***
+     * For control over input values.
+     *  increments counter
+     * @return Value of U for present step 
+     */
+    public float stepCounter(){
+        
+        if ( sample_counter < n_samples - 1 ){
+            
+            return inputValues[++sample_counter];  
+            
+        }else{
+            return inputValues[0];
+        }
+
+    }
     
 }

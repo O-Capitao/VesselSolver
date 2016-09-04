@@ -15,7 +15,7 @@ public class Simulation {
     private Network nw;
     private SimulationProperties sp;
     
-    /***
+    /*******
      * Default constructor and POE
      * @param name - String containing symbolic name for this Simulation
      * @param inputFile - String with full filepath to input data xml file
@@ -25,12 +25,44 @@ public class Simulation {
         sp = NetworkGenerator.getSimulationPropertiesFromFile(inputFile);
         nw = new Network(name, inputFile, sp);
         
+        sp.initDt(this);
+        
     }
     
-    private void solveStep(){
+    /***
+     * Main Point of Entry For The Solver
+     * Called 1 time
+     */
+    public void solve(){
+        
+        float t = 0f ; //global timecounter
     
+        while (t < sp.totalt ){
+            
+            nw.solveStep();
+            
+            t+=sp.dt;
+            System.out.println("Time: " + t );
+            
+        }
         
         
+    }
+    
+    @Override
+    public String toString(){
+        
+        return "Simultion Name: " + name + "\nSimulation Properties: " + sp.toString() + "\n"
+                + "Network Properties: " + nw.toString();
+        
+    }
+
+    public Network getNw() {
+        return nw;
+    }
+
+    public SimulationProperties getSp() {
+        return sp;
     }
     
     

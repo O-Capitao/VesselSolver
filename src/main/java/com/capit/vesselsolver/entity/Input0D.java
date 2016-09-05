@@ -1,6 +1,7 @@
 package com.capit.vesselsolver.entity;
 
 import com.capit.vesselsolver.solver.Solver;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -38,6 +39,12 @@ public class Input0D extends AbsElement {
          * Assign forced input values --- imposed velocity
          */
         inputValues = sinGenerator(n_samples, amplitude);
+        
+        Logger.getLogger(Input0D.class).debug("Input0D init Completed.");
+        
+        for (float val : inputValues){
+            Logger.getLogger(Input0D.class).debug(val + " ");
+        }
         
     }
     

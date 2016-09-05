@@ -36,7 +36,7 @@ public class SimulationProperties {
      */
     public static float determineDeltaTForNetwork(Network nw){
         
-        float winner = 0; //start stupid
+        float winner = 10; //start stupid
         float contender;
         
         for (Map.Entry<String,AbsElement> ele : nw.elements.entrySet()){
@@ -46,22 +46,19 @@ public class SimulationProperties {
                 //for 1D elements
                 contender = Branch1D.getMaximumDT((Branch1D)ele.getValue());
                 
-                if (contender > winner ){
+                if (contender < winner ){
                     winner = contender;
                 }
-                
-                
             }
-            
         } 
-        
         return winner;
     }
     
     
     @Override
     public String toString(){
-        return "totalTime=" + totalt + " courantNumber=" + courant + " delta_t=" + dt;
+        return "\n         totalTime=" + totalt + 
+                "\n         courantNumber=" + courant + "\n         delta_t=" + dt;
     }
     
 }

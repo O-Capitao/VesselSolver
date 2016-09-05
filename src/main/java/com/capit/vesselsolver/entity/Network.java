@@ -5,13 +5,15 @@ import com.capit.vesselsolver.util.NetworkGenerator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.log4j.Logger;
+
 
 
 /**
  *Handler for collection of AbsElements
  * @author capitaoF
  */
-public class Network {
+public class Network implements Cloneable {
     
     String name;
     AbsElement root;
@@ -45,6 +47,10 @@ public class Network {
         elements.entrySet().stream().forEach((entry) -> {
             entry.getValue().linkUp(this);
         });
+        
+        
+        Logger.getLogger(Network.class).info("\n##################################################################\n              Network has been Constructed\n"
+                        + this.toString());
         
     }
     

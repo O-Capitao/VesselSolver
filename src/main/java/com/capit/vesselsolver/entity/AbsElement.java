@@ -22,7 +22,6 @@ public abstract class AbsElement {
     
     /***
      * GETTERS AND SETTERS
-     * 
      */
     public String getName() {
         return name;

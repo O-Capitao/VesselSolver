@@ -25,12 +25,13 @@ public abstract class Solver {
      */
     public static void stepInput0D(Input0D in0d){
         
-        in0d.state[0][2] = in0d.stepCounter();  //u
+        float val = in0d.stepCounter();
+        
         
         Branch1D son = (Branch1D)in0d.getSon(); //ugly and stupid
     
-        in0d.state[0][0] = in0d.state[0][2] + 4 * son.getC0() ;
-        in0d.state[0][1] = in0d.state[0][2] - 4 * son.getC0() ;
+        in0d.state[0][0] = val + 4 * son.getC0() ;
+        in0d.state[0][1] = val - 4 * son.getC0() ;
         
     }
     
@@ -44,7 +45,7 @@ public abstract class Solver {
      */
     public static void stepOutput0D(Output0D out0d){
         
-        System.arraycopy(out0d.getFather().state[0], 0, out0d.state[0], 0, 3);
+        System.arraycopy(out0d.getFather().state[0], 0, out0d.state[0], 0, 2);
         
     }
         

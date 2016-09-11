@@ -3,6 +3,7 @@ package com.capit.vesselsolver.sim;
 import com.capit.vesselsolver.entity.AbsElement;
 import com.capit.vesselsolver.entity.Branch1D;
 import com.capit.vesselsolver.entity.Network;
+import com.capit.vesselsolver.util.StringUtil;
 import java.util.Map;
 
 /**
@@ -57,8 +58,12 @@ public class SimulationProperties {
     
     @Override
     public String toString(){
-        return "\n         totalTime=" + totalt + 
-                "\n         courantNumber=" + courant + "\n         delta_t=" + dt;
+        
+        return "{" + StringUtil.jsonify("totalt") + ":" + totalt + StringUtil.delimiter +
+                StringUtil.jsonify("courant")+ ":" + courant + StringUtil.delimiter + 
+                StringUtil.jsonify("dt") + ":" + dt + "}";
+        
+
     }
     
 }

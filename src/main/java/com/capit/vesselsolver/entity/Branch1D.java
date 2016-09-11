@@ -74,7 +74,7 @@ public class Branch1D extends AbsElement{
             
             out[0] = 4 * C0 ;
             out[1] = - out[0] ;
-            out[2] = 0 ; 
+            
             
         }
         

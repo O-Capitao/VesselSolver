@@ -1,3 +1,4 @@
 target/
 /nbproject/
 VesselLog.log
+/output_files/*

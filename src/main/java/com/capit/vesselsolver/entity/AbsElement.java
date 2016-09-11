@@ -1,6 +1,7 @@
 package com.capit.vesselsolver.entity;
 
 import com.capit.vesselsolver.solver.Solver;
+import com.capit.vesselsolver.util.StringUtil;
 
 /**
  * TODO:
@@ -13,7 +14,7 @@ public abstract class AbsElement {
      * Every element keeps this private reference to the network
      */
     private static Network nw;
-    String name;
+    String id;
     int n_disc;
     String fatherName, sonName;
     public float[][] state;
@@ -23,12 +24,12 @@ public abstract class AbsElement {
     /***
      * GETTERS AND SETTERS
      */
-    public String getName() {
-        return name;
+    public String getId() {
+        return id;
     }
 
-    public void setName(String id) {
-        this.name = id;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public int getN_disc() {
@@ -77,11 +78,11 @@ public abstract class AbsElement {
     /****
      * State is defined by :
      * 
-     * {W1, W2, u } ( C0 é fixo e propriedade )
+     * {W1, W2 } ( C0 é fixo e propriedade )
      */
     final void initState(){
         
-        state = new float[n_disc][3];
+        state = new float[n_disc][2];
         
         for (float[] out : state){
             for (float inn : out ){
@@ -95,7 +96,7 @@ public abstract class AbsElement {
      * 
      */
     public AbsElement(String name){
-        this.name = name ;
+        this.id = name ;
     }
     
     public void setState(float[][] state) {
@@ -106,7 +107,7 @@ public abstract class AbsElement {
     @Override
     public String toString(){
         
-        return "\n\nELEMENT\nElement Name: " + this.getName()+
+        return "\n\nELEMENT\nElement Name: " + this.getId()+
                     "\nFather= " + fatherName + 
                     "\nSon= " + sonName;
     }
@@ -120,5 +121,22 @@ public abstract class AbsElement {
         nw =net;
     }
     
+    public String stateToJSONText(){
+        
+        String output = "[";
+        
+        for (int i = 0 ; i < this.n_disc ; i++ ){
+            
+            output += "[" + state[i][0] + StringUtil.delimiter + state[i][1] + "]";
+            
+            if ( i <= (n_disc-1) ){
+                
+                output += StringUtil.delimiter;
+                
+            }
+        }
+      
+        return output+"]";
+    }
     
 }

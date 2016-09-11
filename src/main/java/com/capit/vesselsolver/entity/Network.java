@@ -34,7 +34,7 @@ public class Network implements Cloneable {
             element_list = NetworkGenerator.getElementsFromFile(fileName);
             
             element_list.stream().forEach((ae) -> {
-                elements.put(ae.name, ae);
+                elements.put(ae.id, ae);
             });
   
         }

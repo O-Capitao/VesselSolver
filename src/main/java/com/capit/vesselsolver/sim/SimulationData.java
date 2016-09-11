@@ -2,6 +2,7 @@ package com.capit.vesselsolver.sim;
 
 import com.capit.vesselsolver.entity.AbsElement;
 import com.capit.vesselsolver.entity.Network;
+import com.capit.vesselsolver.util.FileUtil;
 import com.capit.vesselsolver.util.StringUtil;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -29,10 +30,8 @@ public class SimulationData {
     int buff_size;
     int write_counter;
     
-    private String buffer_output;
+    String dirpath, filename;
     
-    String dirpath, filename; //fileOutput
-    //File file;
     
     public SimulationData(Simulation sim, int buff_size, int write_counter,
                     String path ){
@@ -65,7 +64,7 @@ public class SimulationData {
         
         writeToBuff();
         
-        filename = StringUtil.initFile(dirpath); //creates new random named file
+        filename = FileUtil.initFile(dirpath); //creates new random named file
         
         beginFile();
         finalizeFile();
@@ -89,7 +88,7 @@ public class SimulationData {
      */
     private void writeToFile(){
         
-        StringUtil.appendStringToFile(buffertoJSONText(),
+        FileUtil.appendStringToFile(buffertoJSONText(),
                 dirpath);
             
     }
@@ -106,7 +105,7 @@ public class SimulationData {
         String init_string = StringUtil.jsonify("simulationData:") +":" + "{" ;
         init_string += buffertoJSONText();
         
-        StringUtil.appendStringToFile(init_string, dirpath + filename );
+        FileUtil.appendStringToFile(init_string, dirpath + filename );
     
     }
     
@@ -114,7 +113,7 @@ public class SimulationData {
     //Run this to finaliza file storing process
     private void finalizeFile(){
         
-        StringUtil.appendStringToFile("}", dirpath + filename );
+        FileUtil.appendStringToFile("}", dirpath + filename );
             
     }
     

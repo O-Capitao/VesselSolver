@@ -15,17 +15,24 @@ public class Simulation {
     private Network nw;
     private SimulationProperties sp;
     
+    public SimulationData sd;
+    
     /*******
      * Default constructor and POE
      * @param name - String containing symbolic name for this Simulation
      * @param inputFile - String with full filepath to input data xml file
+     * @param outputPath - Full path to folder with output files
      */
-    public Simulation(String name, String inputFile){
+    public Simulation(String name, String inputFile, String outputPath){
         
         sp = NetworkGenerator.getSimulationPropertiesFromFile(inputFile);
-        nw = new Network(name, inputFile, sp);
+        nw = new Network(name, inputFile, sp, this);
+        
         
         sp.initDt(this);
+        
+        sd = new SimulationData(this, 3, 3, outputPath );
+        
         
     }
     

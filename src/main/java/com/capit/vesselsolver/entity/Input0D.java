@@ -1,6 +1,7 @@
 package com.capit.vesselsolver.entity;
 
 import com.capit.vesselsolver.solver.Solver;
+import com.capit.vesselsolver.util.StringUtil;
 import org.apache.log4j.Logger;
 
 /**
@@ -72,8 +73,11 @@ public class Input0D extends AbsElement {
     
     @Override
     public String toString(){
-        return super.toString() + "\nT=" + this.T +
-                    "\namplitude=" + this.amplitude;
+        
+        return "{" + StringUtil.jsonify("baseObjProps") + ":" + super.toString() + StringUtil.delimiter + 
+                     StringUtil.jsonify("T") + ":" + T + StringUtil.delimiter +
+                     StringUtil.jsonify("amplitude") + ":" + amplitude + StringUtil.delimiter +
+                     StringUtil.jsonify("n_samples") + ":" + n_samples + StringUtil.delimiter+ "}";
     }
 
     @Override

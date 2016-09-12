@@ -78,6 +78,10 @@ public class FileUtil {
                 
                 Logger.getLogger(StringUtil.class.getName()).log(Level.SEVERE, null, ex);
                 
+            } catch (NullPointerException ex){
+                
+                Logger.getLogger(StringUtil.class.getName()).log(Level.SEVERE, null, ex);
+                
             }
         }
         

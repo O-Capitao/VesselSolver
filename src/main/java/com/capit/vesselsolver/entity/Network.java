@@ -1,5 +1,7 @@
 package com.capit.vesselsolver.entity;
 
+import com.capit.vesselsolver.sim.Simulation;
+import com.capit.vesselsolver.sim.SimulationData;
 import com.capit.vesselsolver.sim.SimulationProperties;
 import com.capit.vesselsolver.util.NetworkGenerator;
 import java.util.HashMap;
@@ -18,15 +20,17 @@ public class Network implements Cloneable {
     String name;
     AbsElement root;
     
-    
+    Simulation sim;
     
     public Map<String, AbsElement> elements;
 
 
-    public Network(String name, String fileName, SimulationProperties sp) {
+    public Network(String name, String fileName, SimulationProperties sp, Simulation owner ) {
         
         this.name = name;
         this.elements = new HashMap<>();
+        
+        sim = owner;
         
         //Init the Hash Map
         {
@@ -42,7 +46,7 @@ public class Network implements Cloneable {
         //hardcoded and ugly...
         this.root = elements.get("input");
         
-        AbsElement.setNetwork(this);
+        //AbsElement.setNetwork(this);
         
         elements.entrySet().stream().forEach((entry) -> {
             entry.getValue().linkUp(this);
@@ -71,6 +75,7 @@ public class Network implements Cloneable {
             
         } while ( worker != null );
         
+        sim.sd.step();
         
     }
 

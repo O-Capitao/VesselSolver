@@ -1,6 +1,5 @@
 package com.capit.vesselsolver.entity;
 
-import com.capit.vesselsolver.solver.Solver;
 import com.capit.vesselsolver.util.StringUtil;
 
 /**
@@ -13,7 +12,7 @@ public abstract class AbsElement {
     /***
      * Every element keeps this private reference to the network
      */
-    private static Network nw;
+    //private static Network nw;
     String id;
     int n_disc;
     String fatherName, sonName;
@@ -107,9 +106,12 @@ public abstract class AbsElement {
     @Override
     public String toString(){
         
-        return "\n\nELEMENT\nElement Name: " + this.getId()+
-                    "\nFather= " + fatherName + 
-                    "\nSon= " + sonName;
+        return "{"+ StringUtil.jsonify("class") + ":" + StringUtil.jsonify(this.getClass().getCanonicalName()) + StringUtil.delimiter + 
+                StringUtil.jsonify("id")+ ":" + StringUtil.jsonify(id)+StringUtil.delimiter +   
+                StringUtil.jsonify("n_disc") + ":" + n_disc + StringUtil.delimiter + 
+                StringUtil.jsonify("father") + ":" + StringUtil.jsonify(fatherName) + StringUtil.delimiter +
+                StringUtil.jsonify("son") + ":" + StringUtil.jsonify(sonName) + "}";
+                
     }
    
     /*****
@@ -117,9 +119,9 @@ public abstract class AbsElement {
      * created by the program belongs
      * @param net - Network Object
      */
-    public static void setNetwork(Network net){
-        nw =net;
-    }
+    //public static void setNetwork(Network net){
+    //    nw =net;
+    //}
     
     public String stateToJSONText(){
         

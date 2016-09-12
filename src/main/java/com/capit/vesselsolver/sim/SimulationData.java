@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *Stores/ Handles Output of Solver
+ * Stores/ Handles Output of Solver
  * 
  * 
  *  parto do principio que dim=2
@@ -27,19 +27,21 @@ public class SimulationData {
     Map<String,List<float[][]>> buff;  //reduzo a dimensão do vector porque 
                                     //eu sei n_disc.
     
-    int buff_size;
-    int write_counter;
+    int buff_size, buff_counter;
+    int write_period , write_counter;
     
     String dirpath, filename;
     
     
-    public SimulationData(Simulation sim, int buff_size, int write_counter,
+    public SimulationData(Simulation sim, int buff_size, int write_period,
                     String path ){
         
         this.sim = sim;
         this.nw = sim.getNw();
         this.buff_size = buff_size;
-        this.write_counter = write_counter;
+        this.write_period = write_period;
+        
+        
         
         this.dirpath = path;
         
@@ -54,6 +56,27 @@ public class SimulationData {
      */
     private void init(){
         
+        write_counter = 0 ;
+        buff_counter = 0 ;
+        
+        /***
+         * 
+         */
+
+        initBuff();
+        writeToBuff();
+        
+        filename = FileUtil.initFile(dirpath); //creates new random named file
+                                              //in output folder
+        
+        beginFile();
+        finalizeFile();
+        
+    }
+    
+    private void initBuff(){
+        
+        
         buff = new HashMap<>();
         
         for (Map.Entry<String,AbsElement> entry : nw.elements.entrySet()){
@@ -61,15 +84,24 @@ public class SimulationData {
             buff.put(entry.getKey(), new LinkedList<>() );
             
         }
+    }
+    
+    public void step(){
         
-        writeToBuff();
         
-        filename = FileUtil.initFile(dirpath); //creates new random named file
+        if (write_counter <= write_period){
+            write_counter ++;
+        }else{
+            
+            writeToBuff();
+            write_counter = 0 ;
+            
         
-        beginFile();
-        finalizeFile();
+        }
         
     }
+    
+    
     
     /***
      * Network state to buffer data.
@@ -81,6 +113,19 @@ public class SimulationData {
             buff.get(entry.getKey()).add(entry.getValue().state);
             
         }
+        
+        if (buff_counter == buff_size){
+            
+            writeToFile();
+            
+            initBuff();
+            
+            buff_counter = 0;
+            
+        }else{
+            buff_counter ++ ;
+        }
+        
     }
     
     /**
@@ -102,8 +147,11 @@ public class SimulationData {
      */
     private void beginFile() {
         
-        String init_string = StringUtil.jsonify("simulationData:") +":" + "{" ;
-        init_string += buffertoJSONText();
+        String init_string = StringUtil.jsonify("simulationData") +":\n" + "{" + "\n"
+                    + StringUtil.jsonify("simulationProperties") + ":" + sim.getSp().toString() + StringUtil.delimiter + "\n"
+                    + StringUtil.jsonify("dataProperties") + ":" + this.toString() + StringUtil.delimiter + "\n"
+                    + StringUtil.jsonify("network") + ":" + sim.getNw().toString() + StringUtil.delimiter + "\n"
+                    + StringUtil.jsonify("bufferSlices") + ":" + "[" + buffertoJSONText() + StringUtil.delimiter + "\n";
         
         FileUtil.appendStringToFile(init_string, dirpath + filename );
     
@@ -111,9 +159,10 @@ public class SimulationData {
     
  
     //Run this to finaliza file storing process
+    // closes bufferSlices array and simulationData object
     private void finalizeFile(){
         
-        FileUtil.appendStringToFile("}", dirpath + filename );
+        FileUtil.appendStringToFile("]\n}", dirpath + filename );
             
     }
     
@@ -160,7 +209,7 @@ public class SimulationData {
         
         for (Map.Entry<String, List<float[][]>> el : this.buff.entrySet() ){
             
-            output+="{";
+            output+="\n{";
             output+= StringUtil.jsonify("id") + ":" + StringUtil.jsonify( el.getKey() ) + StringUtil.delimiter +
                      StringUtil.jsonify("states") + ":[";
             
@@ -175,16 +224,18 @@ public class SimulationData {
                         
                         output+=StringUtil.delimiter;
                         
+                    }else{
+                        output+="]";
                     }
                     
                 }
                 
             }
             
-            output += "}";
+            output += "}"; //fecha o estado
         }
         
-        output += "}";
+        output += "}" + StringUtil.delimiter; // fecha o bufferSlice
         
         return output;
     }

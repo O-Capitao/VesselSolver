@@ -20,7 +20,7 @@ public class SimulationTest {
         
         logger.info("\n##################################################################\n              Starting SimulationTest\n             init");
         
-        Simulation sim = new Simulation("teste","/Users/capitaoF/RepoWork/VesselSolver/input_files/SingleVesselCase.xml");
+        Simulation sim = new Simulation("teste","/Users/capitaoF/RepoWork/VesselSolver/input_files/SingleVesselCase.xml","/Users/capitaoF/RepoWork/VesselSolver/output_files/");
         
         logger.info("\n##################################################################\n              Running SimulationTest\n             solve");
         
@@ -31,16 +31,8 @@ public class SimulationTest {
   
     }
     
-    @Test
-    public void testWrite(){
         
-        Simulation sim = new Simulation("teste","/Users/capitaoF/RepoWork/VesselSolver/input_files/SingleVesselCase.xml");
-        
-        SimulationData sd = new SimulationData(sim, 3, 3,"/Users/capitaoF/RepoWork/VesselSolver/output_files/" );
-        
-
-        
-    }
+   
 
 
     

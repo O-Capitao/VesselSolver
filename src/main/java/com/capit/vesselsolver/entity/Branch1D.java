@@ -1,6 +1,7 @@
 package com.capit.vesselsolver.entity;
 
 import com.capit.vesselsolver.solver.Solver;
+import com.capit.vesselsolver.util.StringUtil;
 
 /**
  *
@@ -41,13 +42,30 @@ public class Branch1D extends AbsElement{
     @Override
     public String toString(){
         
+        
+        /***
+         *         return "{" + StringUtil.jsonify("baseElementProps") + ":" + super.toString() + StringUtil.delimiter + 
+                     StringUtil.jsonify("T") + ":" + T + StringUtil.delimiter +
+                     StringUtil.jsonify("amplitude") + ":" + amplitude + StringUtil.delimiter +
+                     StringUtil.jsonify("n_samples") + ":" + n_samples + StringUtil.delimiter+ "}";
+         * 
+         */
+        
+        return "{" + StringUtil.jsonify("baseElementProps") + ":" + super.toString() + StringUtil.delimiter +
+                    StringUtil.jsonify("L") + ":" + L + StringUtil.delimiter +
+                    StringUtil.jsonify("E") + ":" + E + StringUtil.delimiter +
+                    StringUtil.jsonify("r") + ":" + r + StringUtil.delimiter +
+                    StringUtil.jsonify("h") + ":" + h + StringUtil.delimiter +
+                    StringUtil.jsonify("poiss") + ":" + poiss +
+                "}\n";
+        /*
         return super.toString() + "\nObj. Class = " + Branch1D.class +
                 "\n dx= " + this.dx +
                 "\n L= " + this.L +
                 "\n E= " + this.E +
                 "\n r= " + this.r +
                 "\n C0= " + this.C0;
-        
+        */
     }
 
     @Override

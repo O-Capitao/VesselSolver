@@ -4,6 +4,7 @@ import com.capit.vesselsolver.sim.Simulation;
 import com.capit.vesselsolver.sim.SimulationData;
 import com.capit.vesselsolver.sim.SimulationProperties;
 import com.capit.vesselsolver.util.NetworkGenerator;
+import com.capit.vesselsolver.util.StringUtil;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -97,10 +98,14 @@ public class Network implements Cloneable {
     
     @Override
     public String toString(){
-        String out = "NETWORK\nName= " + this.name;
+        String out = "{" + StringUtil.jsonify("name") + ":" + StringUtil.jsonify(this.name) + StringUtil.delimiter + "\n"
+                + StringUtil.jsonify("elements") + ":\n[" ;
         
         out = elements.entrySet().stream().map((entry) 
                 -> entry.getValue().toString()).reduce(out, String::concat);
+        
+        
+        out += "]\n}";
         
         return out;
     }

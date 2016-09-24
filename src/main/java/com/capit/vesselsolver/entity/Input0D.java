@@ -74,10 +74,10 @@ public class Input0D extends AbsElement {
     @Override
     public String toString(){
         
-        return "{" + StringUtil.jsonify("baseObjProps") + ":" + super.toString() + StringUtil.delimiter + 
+        return "{" + StringUtil.jsonify("baseElementProps") + ":" + super.toString() + StringUtil.delimiter + 
                      StringUtil.jsonify("T") + ":" + T + StringUtil.delimiter +
                      StringUtil.jsonify("amplitude") + ":" + amplitude + StringUtil.delimiter +
-                     StringUtil.jsonify("n_samples") + ":" + n_samples + StringUtil.delimiter+ "}";
+                     StringUtil.jsonify("n_samples") + ":" + n_samples + "}\n";
     }
 
     @Override

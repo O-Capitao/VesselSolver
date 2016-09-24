@@ -49,9 +49,11 @@ public class Simulation {
             nw.solveStep();
             
             t+=sp.dt;
-            System.out.println("Time: " + t );
+            //System.out.println("Time: " + t );
             
         }
+        
+        sd.exit();
         
         
     }

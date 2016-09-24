@@ -15,7 +15,16 @@ import java.util.logging.Logger;
  */
 public class FileUtil {
     
+    public static String filename= null;
+    public static String filepath= null;
+    
     public static String initFile(String filepath){
+        
+        if ( FileUtil.filepath == null ){
+            
+            FileUtil.filepath = filepath;
+            
+        }
         
         try {
             
@@ -23,7 +32,7 @@ public class FileUtil {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
             
             
-            String filename = "solutiondata" + sdf.format(cal.getTime());
+            filename = "solutiondata" + sdf.format(cal.getTime());
             
             File file = new File(filepath + filename);
             
@@ -42,15 +51,14 @@ public class FileUtil {
     /**
      * 
      * @param str String to write
-     * @param filename Full path to output file
+     
      */
-    public static void appendStringToFile(String str, String filename){
+    public static void appendStringToFile(String str){
         
         FileWriter fw = null;
         try {
             
-            File file = new File(filename);
-            
+            File file = new File(filepath + filename);
             
             if (!file.exists()) {
                
@@ -75,10 +83,6 @@ public class FileUtil {
                 fw.close();
                 
             } catch (IOException ex) {
-                
-                Logger.getLogger(StringUtil.class.getName()).log(Level.SEVERE, null, ex);
-                
-            } catch (NullPointerException ex){
                 
                 Logger.getLogger(StringUtil.class.getName()).log(Level.SEVERE, null, ex);
                 

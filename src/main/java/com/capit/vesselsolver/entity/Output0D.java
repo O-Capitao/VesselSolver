@@ -1,6 +1,7 @@
 package com.capit.vesselsolver.entity;
 
 import com.capit.vesselsolver.solver.Solver;
+import com.capit.vesselsolver.util.StringUtil;
 
 /**
  *  Purely Reflective Output
@@ -28,8 +29,9 @@ public class Output0D extends AbsElement{
     
     @Override
     public String toString(){
-        return super.toString() +"\nObj. Class: " + Output0D.class + 
-                "\nRef. Coef.= " + R; 
+        
+        return "{" + StringUtil.jsonify("baseElementProps") + ":" + super.toString() + StringUtil.delimiter + 
+             StringUtil.jsonify("R") + ":" + R +"}\n";
     }
 
     @Override

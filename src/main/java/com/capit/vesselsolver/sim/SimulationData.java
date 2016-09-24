@@ -11,7 +11,7 @@ import java.util.Map;
 
 /**
  * Stores/ Handles Output of Solver
- * 
+ * Só trata o conteudo do ficheiro.
  * 
  *  parto do principio que dim=2
  * 
@@ -70,7 +70,7 @@ public class SimulationData {
                                               //in output folder
         
         beginFile();
-        finalizeFile();
+        //finalizeFile();
         
     }
     
@@ -133,8 +133,7 @@ public class SimulationData {
      */
     private void writeToFile(){
         
-        FileUtil.appendStringToFile(buffertoJSONText(),
-                dirpath);
+        FileUtil.appendStringToFile(buffertoJSONText());
             
     }
     
@@ -153,17 +152,20 @@ public class SimulationData {
                     + StringUtil.jsonify("network") + ":" + sim.getNw().toString() + StringUtil.delimiter + "\n"
                     + StringUtil.jsonify("bufferSlices") + ":" + "[" + buffertoJSONText() + StringUtil.delimiter + "\n";
         
-        FileUtil.appendStringToFile(init_string, dirpath + filename );
+        FileUtil.appendStringToFile(init_string );
     
     }
     
  
-    //Run this to finaliza file storing process
-    // closes bufferSlices array and simulationData object
     private void finalizeFile(){
         
-        FileUtil.appendStringToFile("]\n}", dirpath + filename );
+        FileUtil.appendStringToFile("]\n}" );
             
+    }
+    
+    // //   Run this to finaliza file storing process
+    public void exit(){
+        finalizeFile();
     }
     
     @Override
